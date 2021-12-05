@@ -11,18 +11,16 @@ from lazy_property import LazyWritableProperty as lazy_property
 import numpy as np
 import pandas as pd
 
-from bokeh.plotting import show, output_file, save
 from bokeh.layouts import Spacer, row, column
 from bokeh.models.widgets import Tabs, Panel
 
-import plotly.tools as plotly_tools
 import plotly.graph_objs as go
 from plotly.subplots import make_subplots
 
 try:
-    from nft.utils.plotting_utils import plot_table_from_df, bokeh_plot_by_date, bokeh_heading
-    from nft.utils.timeit import timeit
-    from nft.utils.logger import get_standard_logger
+    from nft_research.utils.plotting_utils import plot_table_from_df, bokeh_plot_by_date, bokeh_heading
+    from nft_research.utils.timeit import timeit
+    from nft_research.utils.logger import get_standard_logger
 except ModuleNotFoundError:
     from utils.plotting_utils import plot_table_from_df, bokeh_plot_by_date, bokeh_heading
     from utils.timeit import timeit
@@ -61,12 +59,23 @@ class NftApi(object):
     @lazy_property
     def assets_cache_path(self):
         """Lazy property to hold the test raw assets path."""
-        return self.cache_dir.joinpath('assets', f'{self.contract_address}.parquet')
+        dir = self.cache_dir.joinpath('assets')
+        dir.mkdir(exist_ok=True)
+        return dir.joinpath(f'{self.contract_address}.parquet')
 
     @lazy_property
     def traits_cache_path(self):
         """Lazy property to hold the test raw assets path."""
-        return self.cache_dir.joinpath('traits', f'{self.contract_address}.parquet')
+        dir = self.cache_dir.joinpath('traits')
+        dir.mkdir(exist_ok=True)
+        return dir.joinpath(f'{self.contract_address}.parquet')
+
+    @lazy_property
+    def raw_events_cache_path(self):
+        """Lazy property to hold the test raw assets path."""
+        dir = self.cache_dir.joinpath('events')
+        dir.mkdir(exist_ok=True)
+        return dir.joinpath(f'{self.contract_address}.parquet')
 
     @lazy_property
     def assets_data(self):
@@ -86,6 +95,7 @@ class NftApi(object):
     def traits_data(self):
         """Lazy property to hold the traits data."""
         df = self.raw_traits_data.set_index(['name', 'trait_type'])['value'].unstack().fillna('')
+        # XXX Fixme: Want to add some basic traits data.
         return df
 
     @lazy_property
@@ -159,11 +169,6 @@ class NftApi(object):
                 break
             output_data.extend(data)
         return output_data
-
-    @lazy_property
-    def raw_events_cache_path(self):
-        """Lazy property to hold the test raw assets path."""
-        return self.cache_dir.joinpath('events', f'{self.contract_address}.parquet')
 
     @lazy_property
     def events_data(self):
@@ -405,7 +410,7 @@ if __name__ == '__main__':
     # api.traits_data.to_csv('...')
 
     # To get RKL boost values:
-    # api.rkl_boost_values
+    api.rkl_boost_values
 
     # Events data currently not working in Opensea API. To investigate.
-    # api.events_data
+    api.events_data

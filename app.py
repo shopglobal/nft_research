@@ -2,12 +2,12 @@
 import dash
 from dash import dcc
 from dash import html
-
-import plotly
-import plotly.graph_objs as go
 import plotly.express as px
 
-from nft_api import NftApi
+try:
+    from nft_api import NftApi
+except ModuleNotFoundError:
+    from nft_research.nft_api import NftApi
 
 rumble_kongs_contract_address = '0xef0182dc0574cd5874494a120750fd222fdb909a'
 rebel_bots_contract_address = '0xbbe23e96c48030dc5d4906e73c4876c254100d33'
@@ -54,31 +54,31 @@ app.layout = html.Div(
                 #     ),
                 #     className='card',
                 # ),
-                # html.Div(
-                #     dcc.Graph(
-                #         figure={
-                #             'cache': [
-                #                 {
-                #                     'x': api.assets_data[api.assets_data['sell_order_1_eth_price'] < 5.0]['sell_order_1_eth_price'],
-                #                     'histfunc': 'count',
-                #                     'type': 'histogram',
-                #                 },
-                #             ],
-                #             'layout': {
-                #                 'title': 'Histogram of Live for Sales',
-                #                 'bargap': 0.1
-                #             },
-                #         },
-                #     ),
-                #     className='card',
-                # ),
+                html.Div(
+                    dcc.Graph(
+                        figure={
+                            'cache': [
+                                {
+                                    'x': api.assets_data[api.assets_data['sell_order_1_eth_price'] < 5.0]['sell_order_1_eth_price'],
+                                    'histfunc': 'count',
+                                    'type': 'histogram',
+                                },
+                            ],
+                            'layout': {
+                                'title': 'Histogram of Live for Sales',
+                                'bargap': 0.1
+                            },
+                        },
+                    ),
+                    className='card',
+                ),
                 html.Div(
                     children=[
                         html.Div([
                             html.Div([
-                                'Max Eth Price2: ',
+                                'Max Eth Price: ',
                                 dcc.Input(
-                                    id='max_eth_input2',
+                                    id='max_eth_input',
                                     value=9999,
                                     type='text')
                             ], style={'width': '48%', 'display': 'inline-block'}),
@@ -102,13 +102,13 @@ app.layout = html.Div(
 
 @app.callback(
     dash.dependencies.Output('all_boost_scatter', 'figure'),
-    [dash.dependencies.Input('max_eth_input2', 'value'),
+    [dash.dependencies.Input('max_eth_input', 'value'),
      dash.dependencies.Input('x_axis_value', 'value')]
 )
-def update_all_boost_values_graph(max_eth_input2, x_axis_value, title='Shooting'):
+def update_all_boost_values_graph(max_eth_input, x_axis_value, title='Shooting'):
     df = api.rkl_boost_values.copy(deep=True)
-    print(max_eth_input2)
-    df = df[df['eth_sale_price'] <= float(max_eth_input2)].copy(deep=True)
+    print(max_eth_input)
+    df = df[df['eth_sale_price'] <= float(max_eth_input)].copy(deep=True)
     fig = px.scatter(x=df[x_axis_value].astype(float),
                      y=df['eth_sale_price'].astype(float),
                      hover_name=df.index)
