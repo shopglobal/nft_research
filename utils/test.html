@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<head>    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_babe27999a694e05a6829840b883bb77 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+            </style>
+        
+</head>
+<body>    
+    
+            <div class="folium-map" id="map_babe27999a694e05a6829840b883bb77" ></div>
+        
+</body>
+<script>    
+    
+            var map_babe27999a694e05a6829840b883bb77 = L.map(
+                "map_babe27999a694e05a6829840b883bb77",
+                {
+                    center: [13.133932434766733, 16.103938729508073],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 2,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_e74c95e9dae04126ad0070dea9a3fd27 = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_babe27999a694e05a6829840b883bb77);
+        
+    
+            var marker_ad89691eb5ab467caeec18e6234532a4 = L.marker(
+                [51.50853, -0.12574],
+                {}
+            ).addTo(map_babe27999a694e05a6829840b883bb77);
+        
+    
+            var icon_1c4b67cb07394e18892ea24a83d7d9ca = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "circle", "iconColor": "white", "markerColor": "Yellow", "prefix": "fa"}
+            );
+            marker_ad89691eb5ab467caeec18e6234532a4.setIcon(icon_1c4b67cb07394e18892ea24a83d7d9ca);
+        
+    
+        var popup_abbf7b0c2b2c4b3894dcb0c3db3f63b6 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_0512c5e7ca124b4480202c0a224af557 = $(`<div id="html_0512c5e7ca124b4480202c0a224af557" style="width: 100.0%; height: 100.0%;">Roboklopp</div>`)[0];
+            popup_abbf7b0c2b2c4b3894dcb0c3db3f63b6.setContent(html_0512c5e7ca124b4480202c0a224af557);
+        
+
+        marker_ad89691eb5ab467caeec18e6234532a4.bindPopup(popup_abbf7b0c2b2c4b3894dcb0c3db3f63b6)
+        ;
+
+        
+    
+    
+            marker_ad89691eb5ab467caeec18e6234532a4.bindTooltip(
+                `<div>
+                     Roboklopp
+                 </div>`,
+                {"sticky": true}
+            );
+        
+</script>

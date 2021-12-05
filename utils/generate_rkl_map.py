@@ -14,3 +14,11 @@ kong_locations = {'Roboklopp': [51.5085300, -0.1257400],
                   }
 
 
+folium.Marker(
+    location=kong_locations['Roboklopp'],
+    popup='Roboklopp',
+    tooltip='Roboklopp',
+    icon=folium.Icon(color='Yellow', prefix='fa', icon='circle'),
+).add_to(world)
+
+world.save('test.html')
