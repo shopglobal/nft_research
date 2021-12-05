@@ -48,8 +48,7 @@ class NftApi(object):
     def base_dir(self):
         """Lazy property to hold the base dir."""
         dir = pathlib.Path(__file__).parent.absolute()
-        if not dir.is_dir():
-            dir.mkdir(exist_ok=True)
+        dir.mkdir(exist_ok=True)
         return dir
 
     @lazy_property
@@ -87,7 +86,6 @@ class NftApi(object):
     def traits_data(self):
         """Lazy property to hold the traits data."""
         df = self.raw_traits_data.set_index(['name', 'trait_type'])['value'].unstack().fillna('')
-        # Want to add price data here.
         return df
 
     @lazy_property
@@ -188,6 +186,7 @@ class NftApi(object):
     def get_raw_events_data(self):
         """Function to get the raw assets cache from Opensea"""
         # XXX Fixme: Need to think of better way to get number of iterations needed.
+        # XXX Fixme: Seems opensea have changed access settings for events data, need to investigate
         output_data = []
         for i in tqdm.tqdm(range(0, 500)):
             params = {'asset_contract_address': self.contract_address,
@@ -407,5 +406,6 @@ if __name__ == '__main__':
 
     # To get RKL boost values:
     # api.rkl_boost_values
-    api.events_data
-    print('')
+
+    # Events data currently not working in Opensea API. To investigate.
+    # api.events_data
