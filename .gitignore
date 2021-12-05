@@ -1,0 +1,6 @@
+*__pycache__*
+.idea*
+
+# Ignore the cache / log folders
+logs/*
+cache/*
