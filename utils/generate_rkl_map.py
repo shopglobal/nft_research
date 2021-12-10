@@ -17,7 +17,9 @@ kongs_dir = assets_dir.joinpath('kongs')
 kong_df = pd.read_csv(assets_dir.joinpath('map_kongs.csv'), index_col=0)
 
 for kong in kong_df.reset_index().itertuples():
-    kong_icon = folium.features.CustomIcon(str(kongs_dir.joinpath(kong.kong_image_name)), icon_size=(30, 30))
+    size_width = 100 * kong.scaling_factor * kong.image_ratio_width / kong.image_ratio_height
+    size_height = 100 * kong.scaling_factor * kong.image_ratio_height / kong.image_ratio_width
+    kong_icon = folium.features.CustomIcon(str(kongs_dir.joinpath(kong.kong_image_name)), icon_size=(size_width, size_height))
     kong_popup = f'<strong>{kong.kong_name}</strong><br>{kong.kong_text}'
     folium.Marker(
         location=[kong.longitude, kong.latitude],
