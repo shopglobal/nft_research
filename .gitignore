@@ -1,6 +1,10 @@
 *__pycache__*
 .idea*
 
+.DS_Store*
+*.DS_Store*
+
 # Ignore the cache / log folders
+
 logs/*
 cache/*
