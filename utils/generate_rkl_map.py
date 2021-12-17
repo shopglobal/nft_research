@@ -2,8 +2,12 @@
 
 import pandas as pd
 import folium
-
+import io
+from PIL import Image
 import pathlib
+
+from selenium import webdriver
+# browser = webdriver.Firefox()
 
 
 world = folium.Map(
@@ -28,4 +32,8 @@ for kong in kong_df.reset_index().itertuples():
         icon=kong_icon,
     ).add_to(world)
 
-world.save('test.html')
+# img_data = world._to_png(5)
+# img = Image.open(io.BytesIO(img_data))
+# img.save('ckc_map.png')
+
+world.save('ckc_map.html')
